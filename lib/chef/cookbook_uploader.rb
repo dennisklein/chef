@@ -151,7 +151,7 @@ class Chef
                                                                              :timestamp   => timestamp,
                                                                              :user_id     => rest.client_name
                                                                              )
-          headers.merge!(sign_obj.sign(OpenSSL::PKey::RSA.new(rest.signing_key)))
+          headers.merge!(sign_obj.sign(OpenSSL::PKey::RSA.new(rest.signing_key),Mixlib::Authentication::SignedHeaderAuth::DEFAULT_SIGN_ALGORITHM,Chef::Config['authentication_protocol_version'] || '1.0'))
         end
 
         begin
